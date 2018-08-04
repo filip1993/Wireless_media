@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WirelessMediaZadatak.Models.Proizvod>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cena)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dobavljac.NazivDobavljaca)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kategorija.NazivKategorije)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Proizvodjac.NazivProizvodjaca)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cena)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dobavljac.NazivDobavljaca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kategorija.NazivKategorije)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Proizvodjac.NazivProizvodjaca)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ProizvodId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

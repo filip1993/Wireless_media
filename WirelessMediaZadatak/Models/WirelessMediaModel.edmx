@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WirelessMediaDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="DobavljacId" />
+          </Key>
+          <Property Name="DobavljacId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivDobavljaca" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Kategorija">
+          <Key>
+            <PropertyRef Name="KategorijaId" />
+          </Key>
+          <Property Name="KategorijaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivKategorije" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="ProizvodId" />
+          </Key>
+          <Property Name="ProizvodId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategorijaId" Type="int" Nullable="false" />
+          <Property Name="ProizvodjacId" Type="int" Nullable="false" />
+          <Property Name="DobavljacId" Type="int" Nullable="false" />
+          <Property Name="Naziv" Type="nvarchar" MaxLength="100" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="100" />
+          <Property Name="Cena" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proizvodjac">
+          <Key>
+            <PropertyRef Name="ProizvodjacId" />
+          </Key>
+          <Property Name="ProizvodjacId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NazivProizvodjaca" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK__Proizvod__Dobavl__2B3F6F97">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="DobavljacId" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Katego__29572725">
+          <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorija">
+              <PropertyRef Name="KategorijaId" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="KategorijaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Proizv__2A4B4B5E">
+          <End Role="Proizvodjac" Type="Self.Proizvodjac" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvodjac">
+              <PropertyRef Name="ProizvodjacId" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="ProizvodjacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WirelessMediaDbModelStoreContainer">
+          <EntitySet Name="Dobavljac" EntityType="Self.Dobavljac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorija" EntityType="Self.Kategorija" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvod" EntityType="Self.Proizvod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proizvodjac" EntityType="Self.Proizvodjac" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Proizvod__Dobavl__2B3F6F97" Association="Self.FK__Proizvod__Dobavl__2B3F6F97">
+            <End Role="Dobavljac" EntitySet="Dobavljac" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Katego__29572725" Association="Self.FK__Proizvod__Katego__29572725">
+            <End Role="Kategorija" EntitySet="Kategorija" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Proizv__2A4B4B5E" Association="Self.FK__Proizvod__Proizv__2A4B4B5E">
+            <End Role="Proizvodjac" EntitySet="Proizvodjac" />
+            <End Role="Proizvod" EntitySet="Proizvod" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WirelessMediaDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Dobavljac">
+          <Key>
+            <PropertyRef Name="DobavljacId" />
+          </Key>
+          <Property Name="DobavljacId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivDobavljaca" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__Proizvod__Dobavl__2B3F6F97" FromRole="Dobavljac" ToRole="Proizvod" />
+        </EntityType>
+        <EntityType Name="Kategorija">
+          <Key>
+            <PropertyRef Name="KategorijaId" />
+          </Key>
+          <Property Name="KategorijaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivKategorije" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__Proizvod__Katego__29572725" FromRole="Kategorija" ToRole="Proizvod" />
+        </EntityType>
+        <EntityType Name="Proizvod">
+          <Key>
+            <PropertyRef Name="ProizvodId" />
+          </Key>
+          <Property Name="ProizvodId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategorijaId" Type="Int32" Nullable="false" />
+          <Property Name="ProizvodjacId" Type="Int32" Nullable="false" />
+          <Property Name="DobavljacId" Type="Int32" Nullable="false" />
+          <Property Name="Naziv" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Cena" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Dobavljac" Relationship="Self.FK__Proizvod__Dobavl__2B3F6F97" FromRole="Proizvod" ToRole="Dobavljac" />
+          <NavigationProperty Name="Kategorija" Relationship="Self.FK__Proizvod__Katego__29572725" FromRole="Proizvod" ToRole="Kategorija" />
+          <NavigationProperty Name="Proizvodjac" Relationship="Self.FK__Proizvod__Proizv__2A4B4B5E" FromRole="Proizvod" ToRole="Proizvodjac" />
+        </EntityType>
+        <EntityType Name="Proizvodjac">
+          <Key>
+            <PropertyRef Name="ProizvodjacId" />
+          </Key>
+          <Property Name="ProizvodjacId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NazivProizvodjaca" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Proizvod" Relationship="Self.FK__Proizvod__Proizv__2A4B4B5E" FromRole="Proizvodjac" ToRole="Proizvod" />
+        </EntityType>
+        <Association Name="FK__Proizvod__Dobavl__2B3F6F97">
+          <End Role="Dobavljac" Type="Self.Dobavljac" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dobavljac">
+              <PropertyRef Name="DobavljacId" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="DobavljacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Katego__29572725">
+          <End Role="Kategorija" Type="Self.Kategorija" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorija">
+              <PropertyRef Name="KategorijaId" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="KategorijaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Proizvod__Proizv__2A4B4B5E">
+          <End Role="Proizvodjac" Type="Self.Proizvodjac" Multiplicity="1" />
+          <End Role="Proizvod" Type="Self.Proizvod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proizvodjac">
+              <PropertyRef Name="ProizvodjacId" />
+            </Principal>
+            <Dependent Role="Proizvod">
+              <PropertyRef Name="ProizvodjacId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WirelessMediaDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Dobavljacs" EntityType="Self.Dobavljac" />
+          <EntitySet Name="Kategorijas" EntityType="Self.Kategorija" />
+          <EntitySet Name="Proizvods" EntityType="Self.Proizvod" />
+          <EntitySet Name="Proizvodjacs" EntityType="Self.Proizvodjac" />
+          <AssociationSet Name="FK__Proizvod__Dobavl__2B3F6F97" Association="Self.FK__Proizvod__Dobavl__2B3F6F97">
+            <End Role="Dobavljac" EntitySet="Dobavljacs" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Katego__29572725" Association="Self.FK__Proizvod__Katego__29572725">
+            <End Role="Kategorija" EntitySet="Kategorijas" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Proizvod__Proizv__2A4B4B5E" Association="Self.FK__Proizvod__Proizv__2A4B4B5E">
+            <End Role="Proizvodjac" EntitySet="Proizvodjacs" />
+            <End Role="Proizvod" EntitySet="Proizvods" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WirelessMediaDbModelStoreContainer" CdmEntityContainer="WirelessMediaDbEntities">
+          <EntitySetMapping Name="Dobavljacs">
+            <EntityTypeMapping TypeName="WirelessMediaDbModel.Dobavljac">
+              <MappingFragment StoreEntitySet="Dobavljac">
+                <ScalarProperty Name="DobavljacId" ColumnName="DobavljacId" />
+                <ScalarProperty Name="NazivDobavljaca" ColumnName="NazivDobavljaca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategorijas">
+            <EntityTypeMapping TypeName="WirelessMediaDbModel.Kategorija">
+              <MappingFragment StoreEntitySet="Kategorija">
+                <ScalarProperty Name="KategorijaId" ColumnName="KategorijaId" />
+                <ScalarProperty Name="NazivKategorije" ColumnName="NazivKategorije" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvods">
+            <EntityTypeMapping TypeName="WirelessMediaDbModel.Proizvod">
+              <MappingFragment StoreEntitySet="Proizvod">
+                <ScalarProperty Name="ProizvodId" ColumnName="ProizvodId" />
+                <ScalarProperty Name="KategorijaId" ColumnName="KategorijaId" />
+                <ScalarProperty Name="ProizvodjacId" ColumnName="ProizvodjacId" />
+                <ScalarProperty Name="DobavljacId" ColumnName="DobavljacId" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proizvodjacs">
+            <EntityTypeMapping TypeName="WirelessMediaDbModel.Proizvodjac">
+              <MappingFragment StoreEntitySet="Proizvodjac">
+                <ScalarProperty Name="ProizvodjacId" ColumnName="ProizvodjacId" />
+                <ScalarProperty Name="NazivProizvodjaca" ColumnName="NazivProizvodjaca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

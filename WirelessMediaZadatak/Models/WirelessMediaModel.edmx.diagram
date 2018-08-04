@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0a1018f62d454aa29d3c428b2081d775" Name="Diagram1">
+        <EntityTypeShape EntityType="WirelessMediaDbModel.Dobavljac" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WirelessMediaDbModel.Kategorija" Width="1.5" PointX="5.875" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WirelessMediaDbModel.Proizvod" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="WirelessMediaDbModel.Proizvodjac" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="WirelessMediaDbModel.FK__Proizvod__Dobavl__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="WirelessMediaDbModel.FK__Proizvod__Katego__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="WirelessMediaDbModel.FK__Proizvod__Proizv__2A4B4B5E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
